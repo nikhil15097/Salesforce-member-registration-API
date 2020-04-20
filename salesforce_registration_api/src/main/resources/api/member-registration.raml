@@ -1,0 +1,103 @@
+#%RAML 1.0
+title: Salesforce Registration API
+types:
+  user:
+    properties:
+      FirstName:
+        type: string
+        required: true
+      LastName:
+        type: string
+        required: true
+      UserName:
+        required: true
+      DOB:
+      Email:
+        required: true 
+
+/register:
+  post:
+    description: Create a new User
+  
+    body:
+      application/json:
+        type: user
+        example:
+          {
+            "FirstName":"test",
+            "LastName":"test",
+            "Email":"test",
+            "DOB":"test",
+            "UserName":"test"
+
+          }
+    responses:
+      200:
+        description: Authentication successful  
+        body: 
+          application/json:
+            example:
+              {
+             "statuscode":"200",   
+            "message":"User created succesfully"
+              }
+      400:
+        description: Authentication failed  
+        body: 
+          application/json:
+            example:
+              {
+            "message":"User already existed"
+              }
+
+/getBasicInformation:
+  post:
+    
+    description: get basic details of user
+    body:
+      application/json:
+        example:
+          {
+            "username":"test"
+          }
+    responses:
+      200:
+        description: get userName  
+        body: 
+          application/json:
+            example:
+              {
+                "Statuscode":"200"
+          
+              } 
+
+/resetPassword:
+  put:
+    description: reset password
+    body:
+      application/json:
+        example:
+          {
+            
+            "UserName":"test@mail.com"
+
+          }
+    responses:
+      200:
+        description: reset password  
+        body: 
+          application/json:
+            example:
+              {
+                "statuscode":"200",
+            "message":"reset password is done succesfull"
+              }  
+    
+      400:
+        description: reset password error 
+        body: 
+          application/json:
+            example:
+              {
+            "message":"user is not exit"
+              }                   
